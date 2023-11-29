@@ -12,11 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cities', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->integer('codigo_uf');
             $table->integer('codigo_municipio');
             $table->string('nome');
-            $table->timestamps();
         });
     }
 
