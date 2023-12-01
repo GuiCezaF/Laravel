@@ -12,6 +12,7 @@ services:
             - ./:/var/www
         networks:
             - laravel
+            - node-red-net
 
     # nginx
     nginx:
@@ -24,6 +25,7 @@ services:
             - ./docker/nginx/:/etc/nginx/conf.d/
         networks:
             - laravel
+            - node-red-net
 
     # db mysql
     db:
@@ -51,6 +53,23 @@ services:
         networks:
             - laravel
 
+    node-red:
+        image: nodered/node-red:latest
+        environment:
+            - TZ=Europe/Amsterdam
+        ports:
+            - "1880:1880"
+        networks:
+            - node-red-net
+            - laravel
+        volumes:
+            - node-red-data:/data
+
+volumes:
+    node-red-data:
+
+
 networks:
+    node-red-net:
     laravel:
         driver: bridge
